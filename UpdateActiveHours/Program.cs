@@ -16,7 +16,8 @@ namespace UpdateActiveHours
                 {
                     ActiveHourDelta = 18; // the max active hour delta was raised to 18 hours with release 1803 for non-Home editions of Win10
                 }
-                if (Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate").GetValue("SetActiveHoursMaxRange") != null &&
+                if (Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate") != null &&
+                    Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate").GetValue("SetActiveHoursMaxRange") != null &&
                     Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate").GetValue("ActiveHoursMaxRange") != null)
                 {
                     ActiveHourDelta = Int32.Parse(Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate").GetValue("ActiveHoursMaxRange").ToString()); // if this registry key exists a group policy setting has set the max active hour delta, so go with whatever this setting is
